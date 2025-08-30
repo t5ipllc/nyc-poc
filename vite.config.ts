@@ -20,4 +20,34 @@ export default defineConfig({
     esbuild: {
         jsx: 'automatic',
     },
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+        strictPort: false, // Allow Vite to use next available port
+        hmr: {
+            host: 'localhost',
+            clientPort: 5173, // This ensures HMR connects to the right port
+        },
+        cors: {
+            origin: [
+                'http://localhost',
+                'http://localhost:8000',
+                // All your .test domains
+                'http://dogtoys.test',
+                'http://menus.test',
+                'http://pet-stores.test',
+                'http://wedding-gowns.test',
+                'http://weddinggowns.test',
+                'http://health-food-stores.test',
+                'http://healthfoodstores.test',
+                'http://mafia.test',
+                // Allow any .test domain
+                /^http:\/\/.*\.test(:\d+)?$/,
+            ],
+            credentials: true,
+        },
+        watch: {
+            usePolling: true, // Helps with file watching in some environments
+        },
+    },
 });
