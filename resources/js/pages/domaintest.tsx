@@ -99,7 +99,7 @@ export default function Welcome({ domain, host, message }) {
                                         <li key={domainKey}>
                                             <a
                                                 href={`https://${domainConfig.url}`}
-                                                className="text-blue-600 hover:text-blue-800 underline"
+                                                className="text-sm text-blue-600 hover:text-blue-800 hover:font-semibold underline"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
