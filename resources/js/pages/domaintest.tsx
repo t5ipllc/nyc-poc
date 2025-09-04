@@ -1,53 +1,66 @@
 import { Head } from '@inertiajs/react';
 
+// @ts-expect-error domain, host, and message all implicitly allow any type
 export default function Welcome({ domain, host, message }) {
-    const getDomainConfig = (domainKey) => {
+    const getDomainConfig = (domainKey: string) => {
         const configs = {
             'dogtoys': {
                 title: 'NYC Dog Toys',
                 color: 'bg-blue-500',
-                description: 'Find the best dog toys in New York City'
+                description: 'Find the best dog toys in New York City',
+                url: 'dogtoys.nyc'
             },
             'menus': {
                 title: 'NYC Menus',
                 color: 'bg-green-500',
-                description: 'Restaurant menus across NYC'
+                description: 'Restaurant menus across NYC',
+                url: 'menus.nyc'
             },
             'pet-stores': {
                 title: 'NYC Pet Stores',
                 color: 'bg-purple-500',
-                description: 'Your local pet store directory'
+                description: 'Your local pet store directory',
+                url: 'pet-stores.nyc'
             },
             'wedding-gowns': {
                 title: 'NYC Wedding Gowns',
                 color: 'bg-pink-500',
-                description: 'Beautiful wedding dresses in NYC'
+                description: 'Beautiful wedding dresses in NYC',
+                url: 'wedding-gowns.nyc'
             },
             'health-food-stores': {
                 title: 'NYC Health Food Stores',
                 color: 'bg-orange-500',
-                description: 'Healthy eating starts here'
+                description: 'Healthy eating starts here',
+                url: 'health-food-stores.nyc'
             },
             'mafia': {
                 title: 'NYC Mafia',
                 color: 'bg-red-500',
-                description: 'The history of organized crime in NYC'
+                description: 'The history of organized crime in NYC',
+                url: 'mafia.nyc'
             },
             'development': {
                 title: 'Development Mode',
                 color: 'bg-gray-500',
-                description: 'Local development environment'
+                description: 'Local development environment',
+                url: 'localhost'
             }
         };
 
         return configs[domainKey] || {
             title: 'Unknown Domain',
             color: 'bg-gray-400',
-            description: 'Domain not configured'
+            description: 'Domain not configured',
+            url: host
         };
     };
 
     const config = getDomainConfig(domain);
+
+    // Get all domain configs except the current one
+    const allDomains = ['dogtoys', 'menus', 'pet-stores', 'wedding-gowns', 'health-food-stores', 'mafia'];
+    const otherDomains = allDomains.filter(domainKey => domainKey !== domain);
 
     return (
         <>
@@ -64,7 +77,7 @@ export default function Welcome({ domain, host, message }) {
                             {config.description}
                         </p>
 
-                        <div className="bg-gray-50 p-4 rounded-lg">
+                        <div className="bg-gray-50 p-4 rounded-lg mb-4">
                             <h3 className="font-semibold text-gray-800 mb-2">
                                 Debug Information:
                             </h3>
@@ -73,6 +86,29 @@ export default function Welcome({ domain, host, message }) {
                                 <div><strong>Domain Key:</strong> {domain}</div>
                                 <div><strong>Message:</strong> {message}</div>
                             </div>
+                        </div>
+
+                        <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h5 className='text-center font-bold text-gray-800 mb-3'>
+                                More NYC Awesomeness:
+                            </h5>
+                            <ul className='list-disc list-inside space-y-1'>
+                                {otherDomains.map(domainKey => {
+                                    const domainConfig = getDomainConfig(domainKey);
+                                    return (
+                                        <li key={domainKey}>
+                                            <a
+                                                href={`https://${domainConfig.url}`}
+                                                className="text-blue-600 hover:text-blue-800 underline"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {domainConfig.title}
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
 
                         <div className="mt-6">
