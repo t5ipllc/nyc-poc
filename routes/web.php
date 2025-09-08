@@ -6,7 +6,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     $currentDomain = app('current.domain');
 
-    return Inertia::render('domaintest', [
+    return Inertia::render('domain-test', [
         'domain' => $currentDomain,
         'host' => request()->getHost(),
         'message' => "Welcome to " . request()->getHost(),
