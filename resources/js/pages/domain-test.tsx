@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 // @ts-expect-error domain, host, and message all implicitly allow any type
 export default function Welcome({ domain, host, message }) {
     const getDomainConfig = (domainKey: string) => {
+        // noinspection SpellCheckingInspection
         const configs = {
             'dogtoys': {
                 title: 'NYC Dog Toys',
